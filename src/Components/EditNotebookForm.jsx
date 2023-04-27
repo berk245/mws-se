@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import {useNavigate} from 'react-router-dom'
 import {editNotebookName} from '../utils'
 
-function EditNotebookForm({ content, userId, reload,  close}) {
+function EditNotebookForm({ content, reload,  close}) {
   const [editItem, setEditItem] = useState(false);
   const [fetchingData, setFetchingData] = useState(false)
   const [newNotebookName, setNewNotebookName] = useState(content.NotebookName)
@@ -19,7 +19,6 @@ function EditNotebookForm({ content, userId, reload,  close}) {
         }
     }catch(err){
         alert('Something went wrong with the update. Please try again.')
-        console.log(err)
     }finally{
         setFetchingData(false)
         setEditItem(false)

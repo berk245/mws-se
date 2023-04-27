@@ -7,7 +7,6 @@ import WordForm from "../Components/WordForm";
 
 import "./AllWords.css";
 function AllWords() {
-  const [userId, setUserId] = useState();
   const [username, setUsername] = useState("");
   const [refetch, setRefetch] = useState(false);
   const [showAddNewWordForm, setShowAddNewWordForm] = useState(false);
@@ -18,13 +17,11 @@ function AllWords() {
     if (!isUserAuthenticated()) navigate("/not-authorized");
     else {
       const userInfo = JSON.parse(localStorage.getItem("user"));
-      setUserId(userInfo.userId);
       setUsername(userInfo.username);
     }
   }, []);
 
   const { userWords, fetchError, fetchingData } = useAllUserWords(
-    userId,
     refetch
   );
 
@@ -44,14 +41,12 @@ function AllWords() {
       {showAddNewWordForm && (
           <WordForm
             type="addNew"
-            userId={userId}
             reload={() => setRefetch(!refetch)}
             close={() => setShowAddNewWordForm(false)}
           />
         )}
       <WordsList
         wordList={userWords}
-        userId={userId}
         reload={() => setRefetch(!refetch)}
       />
     </div>

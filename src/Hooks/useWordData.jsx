@@ -14,7 +14,6 @@ function useWordData(wordId, refetchData) {
         setWordData(response);
       }
     } catch (err) {
-      console.log(err);
       setFetchError(true);
     } finally {
       setFetchingData(false);

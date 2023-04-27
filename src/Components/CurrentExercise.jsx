@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {completeExercise} from '../utils'
 
-function CurrentExercise({userId, exerciseData, setExerciseResults, setCurrentView}) {
+function CurrentExercise({exerciseData, setExerciseResults, setCurrentView}) {
     const exerciseId = exerciseData.exerciseId
     const [exerciseQuestions, setExerciseQuestions] = useState(exerciseData.exerciseQuestions)
     const [resultsError, setResultsError] = useState(false)

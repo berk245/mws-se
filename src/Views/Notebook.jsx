@@ -13,7 +13,6 @@ function Notebook() {
   const [serverMessage, setServerMessage] = useState(false);
   const [showAddNewWordForm, setShowAddNewWordForm] = useState(false);
 
-  const [userId, setUserId] = useState();
   const [username, setUsername] = useState("");
   const navigate = useNavigate();
 
@@ -21,13 +20,11 @@ function Notebook() {
     if (!isUserAuthenticated()) navigate("/not-authorized");
     else {
       const userInfo = JSON.parse(localStorage.getItem("user"));
-      setUserId(userInfo.userId);
       setUsername(userInfo.username);
     }
   }, []);
   const { notebookInfo, notebookWords, fetchingData, fetchError } =
     useNotebookInfo(notebookId, reloadList);
-  if (!username || !userId) navigate("/not-authorized");
 
   const handleDelete = async () => {
     try {
@@ -81,7 +78,6 @@ function Notebook() {
       {showEditNotebookForm && (
         <EditNotebookForm
           content={notebookInfo}
-          userId={userId}
           close={() => setShowEditNotebookForm(false)}
           reload={() => setReloadList(!reloadList)}
         />
@@ -103,7 +99,6 @@ function Notebook() {
       {showAddNewWordForm && (
         <WordForm
           type="addNew"
-          userId={userId}
           notebookId={notebookId}
           reload={() => setReloadList(!reloadList)}
           close={() => setShowAddNewWordForm(false)}
@@ -112,7 +107,6 @@ function Notebook() {
       <WordsList
         wordList={notebookWords}
         notebookId={notebookId}
-        userId={userId}
         reload={() => {
           setReloadList(!reloadList);
         }}

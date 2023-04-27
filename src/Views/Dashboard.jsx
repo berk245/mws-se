@@ -4,31 +4,16 @@ import { isUserAuthenticated, logoutUser } from "../utils";
 import "./Dashboard.css";
 function Dashboard() {
   const navigate = useNavigate();
-  const [userId, setUserId] = useState();
   const [username, setUsername] = useState("");
 
   useEffect(() => {
     if (!isUserAuthenticated()) navigate("/not-authorized");
     else {
       const userInfo = JSON.parse(localStorage.getItem("user"));
-      setUserId(userInfo.userId);
       setUsername(userInfo.username);
     }
   }, []);
-  if (!userId) {
-    return (
-      <div>
-        <h1>Please login in to view this page</h1>
-        <button
-          onClick={() => {
-            navigate("/");
-          }}
-        >
-          Login page
-        </button>
-      </div>
-    );
-  }
+ 
 
   return (
     <div className="dashboard-main">

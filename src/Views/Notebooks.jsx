@@ -9,7 +9,6 @@ import "./Notebooks.css";
 function Notebooks() {
   const [addNotebookForm, setAddnotebookForm] = useState(false);
   const [reloadList, setReloadList] = useState(false);
-  const [userId, setUserId] = useState();
   const [username, setUsername] = useState("");
   const navigate = useNavigate();
 
@@ -17,16 +16,14 @@ function Notebooks() {
     if (!isUserAuthenticated()) navigate("/not-authorized");
     else {
       const userInfo = JSON.parse(localStorage.getItem("user"));
-      setUserId(userInfo.userId);
       setUsername(userInfo.username);
     }
   }, []);
 
   const { userNotebooks, fetchingData, fetchError } = useNotebooksList(
-    userId,
     reloadList
   );
-  if (!username || !userId) navigate("/not-authorized");
+  if (!username) navigate("/not-authorized");
 
   const closeAddNewForm = () => {
     setAddnotebookForm(false);
@@ -50,7 +47,7 @@ function Notebooks() {
         )}
       </div>
       {addNotebookForm && (
-        <AddNewNotebook userId={userId} close={closeAddNewForm} />
+        <AddNewNotebook close={closeAddNewForm} />
       )}
       <div className="view-main-content">
         {fetchingData ? (
@@ -65,7 +62,6 @@ function Notebooks() {
                   <h3>Your Notebooks</h3>
                 </div>
                 <NotebooksList
-                  userId={userId}
                   userNotebooks={userNotebooks}
                   reload={() => setReloadList(!reloadList)}
                 />

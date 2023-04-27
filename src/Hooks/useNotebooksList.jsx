@@ -14,7 +14,6 @@ function useNotebooksList(reloadList) {
         setUserNotebooks(response.notebooks);
       }
     } catch (err) {
-      console.log(err);
       setFetchError(true);
     } finally {
       setFetchingData(false);

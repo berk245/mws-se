@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { editNotebookName } from "../utils";
 import EditNotebookForm from "./EditNotebookForm";
-function ListItem({ content, userId, reload }) {
+function ListItem({ content, reload }) {
   const [editItem, setEditItem] = useState(false);
   const [fetchingData, setFetchingData] = useState(false);
   const [newNotebookName, setNewNotebookName] = useState(content.NotebookName);
@@ -11,7 +11,7 @@ function ListItem({ content, userId, reload }) {
 
   if (editItem)
     return (
-      <EditNotebookForm content={content} reload={reload} userId={userId} />
+      <EditNotebookForm content={content} reload={reload} />
     );
   else {
     return (

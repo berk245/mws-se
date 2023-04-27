@@ -8,7 +8,6 @@ import {
 } from "../utils";
 function PreExercise({
   userNotebooks,
-  userId,
   setExerciseData,
   setCurrentView,
 }) {

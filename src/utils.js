@@ -1,7 +1,7 @@
 // const baseUrl = "https://api.berkozzambak.online";
 const baseUrl = "http://localhost:5000";
 
-const getRequestBody = (requestType, data) => {
+function getRequestBody(requestType, data) {
   return {
     method: requestType,
     headers: {
@@ -10,7 +10,7 @@ const getRequestBody = (requestType, data) => {
     },
     body: JSON.stringify(data),
   };
-};
+}
 
 const loginUser = async (userData) => {
   try {
@@ -99,22 +99,16 @@ const getUserNotebooksList = async () => {
   return response;
 };
 
-const saveUserData = ({ token, userId, username }) => {
-  try {
+const saveUserData = ({ token, username }) => {
     document.cookie = `auth_token=${token}`;
 
     localStorage.setItem(
       "user",
       JSON.stringify({
-        userId: userId,
         username: username,
       })
     );
     return;
-  } catch (err) {
-    console.log(err);
-    return;
-  }
 };
 
 const parseIdFromURL = (url) => {

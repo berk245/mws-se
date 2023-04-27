@@ -10,17 +10,11 @@ function Word() {
   const [serverMessage, setServerMessage] = useState("");
   const [refetchData, setRefetchData] = useState(false);
 
-  const [userId, setUserId] = useState();
-  const [username, setUsername] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
     if (!isUserAuthenticated()) navigate("/not-authorized");
-    else {
-      const userInfo = JSON.parse(localStorage.getItem("user"));
-      setUserId(userInfo.userId);
-      setUsername(userInfo.username);
-    }
+    
   }, []);
 
   const { fetchingData, fetchError, wordData } = useWordData(
@@ -80,7 +74,6 @@ function Word() {
         <WordForm
           type="edit"
           wordId={wordId}
-          userId={userId}
           notebookId={wordData.NotebookID}
           wordOriginal={wordData.WordOriginal}
           wordTranslation={wordData.WordTranslation}

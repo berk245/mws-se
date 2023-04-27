@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-import {useNavigate} from 'react-router-dom'
-import {editNotebookName} from '../utils'
 import {createNotebook} from '../utils'
 
-function AddNewNotebook({ userId, reload, close }) {
+function AddNewNotebook({ close }) {
   const [newNotebookName, setNewNotebookName] = useState("");
   const addNewNotebook = async() => {
-    let createSuccess = await createNotebook({newNotebookName, userId})
+    let createSuccess = await createNotebook({newNotebookName})
     if(createSuccess) {
       close()
     }else{

@@ -18,7 +18,6 @@ function useNotebookInfo(notebookId, reloadList) {
         setNotebookWords(response.notebookWords)
       }
     } catch (err) {
-      console.log(err);
       setFetchError(true);
     } finally {
       setFetchingData(false);

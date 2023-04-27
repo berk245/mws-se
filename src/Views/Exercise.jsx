@@ -8,12 +8,11 @@ import {useNavigate} from 'react-router-dom'
 import './Exercise.css'
 
 function Exercise() {
-  const [userId, setUserId] = useState();
   const [username, setUsername] = useState('')
   const [currentView, setCurrentView] = useState('preExercise')
   const [exerciseData, setExerciseData] = useState({})
   const [exerciseResults, setExerciseResults] = useState({})
-  const {userNotebooks, fetchError, fetchingData} = useNotebooksList(userId)
+  const {userNotebooks, fetchError, fetchingData} = useNotebooksList()
   
   const navigate = useNavigate()
 
@@ -21,7 +20,6 @@ function Exercise() {
     if (!isUserAuthenticated()) navigate("/not-authorized");
     else {
       const userInfo = JSON.parse(localStorage.getItem("user"));
-      setUserId(userInfo.userId)
       setUsername(userInfo.username)
     }
   }, []);
@@ -30,10 +28,9 @@ function Exercise() {
   if(fetchingData) return <p>Loading</p>
   return (
     <div className='exercise-view-main'>
-      {currentView == 'preExercise' && <PreExercise userNotebooks={userNotebooks} userId={userId} setExerciseData={setExerciseData} setCurrentView={setCurrentView}/>}
-      {currentView == 'exercise' && <CurrentExercise userId={userId} exerciseData={exerciseData} setExerciseResults={setExerciseResults} setCurrentView={setCurrentView}/>}
+      {currentView == 'preExercise' && <PreExercise userNotebooks={userNotebooks} setExerciseData={setExerciseData} setCurrentView={setCurrentView}/>}
+      {currentView == 'exercise' && <CurrentExercise exerciseData={exerciseData} setExerciseResults={setExerciseResults} setCurrentView={setCurrentView}/>}
       {currentView == 'postExercise' && <PostExercise exerciseResults={exerciseResults}/>}
-
     </div>
   )
 }
