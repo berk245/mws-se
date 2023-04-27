@@ -1,5 +1,5 @@
-// const baseUrl = "https://api.berkozzambak.online";
-const baseUrl = "http://localhost:5000";
+const baseUrl = "https://api.berkozzambak.online";
+// const baseUrl = "http://localhost:5000";
 
 function getRequestBody(requestType, data) {
   return {
@@ -68,7 +68,7 @@ const editNotebookName = async (params) => {
     baseUrl + "/notebook/edit",
     getRequestBody("POST", params)
   );
-  if(response.status === 403) return handle403Response()
+  if (response.status === 403) return handle403Response();
   return response.ok || false;
 };
 
@@ -81,7 +81,7 @@ const getNotebookData = async (notebookId) => {
       token: parseAuthCookie("auth_token"),
     },
   });
-  if(response.status === 403) return handle403Response()
+  if (response.status === 403) return handle403Response();
   return response;
 };
 
@@ -95,20 +95,20 @@ const getUserNotebooksList = async () => {
       token: parseAuthCookie("auth_token"),
     },
   });
-  if(response.status === 403) return handle403Response()
+  if (response.status === 403) return handle403Response();
   return response;
 };
 
 const saveUserData = ({ token, username }) => {
-    document.cookie = `auth_token=${token}`;
+  document.cookie = `auth_token=${token}`;
 
-    localStorage.setItem(
-      "user",
-      JSON.stringify({
-        username: username,
-      })
-    );
-    return;
+  localStorage.setItem(
+    "user",
+    JSON.stringify({
+      username: username,
+    })
+  );
+  return;
 };
 
 const parseIdFromURL = (url) => {
@@ -120,7 +120,7 @@ const deleteNotebook = async (params) => {
     baseUrl + "/notebook/delete",
     getRequestBody("DELETE", params)
   );
-  if(response.status === 403) return handle403Response()
+  if (response.status === 403) return handle403Response();
   return response.ok;
 };
 
@@ -129,7 +129,7 @@ const createWord = async (newWord) => {
     baseUrl + "/word/add",
     getRequestBody("POST", newWord)
   );
-  if(response.status === 403) return handle403Response()
+  if (response.status === 403) return handle403Response();
   return response.ok;
 };
 
@@ -138,7 +138,7 @@ const editWord = async (newWord) => {
     baseUrl + "/word/edit",
     getRequestBody("POST", newWord)
   );
-  if(response.status === 403) return handle403Response()
+  if (response.status === 403) return handle403Response();
   return response.ok;
 };
 
@@ -147,7 +147,7 @@ const deleteWord = async (params) => {
     baseUrl + "/word/delete",
     getRequestBody("DELETE", params)
   );
-  if(response.status === 403) return handle403Response()
+  if (response.status === 403) return handle403Response();
   return response.ok;
 };
 
@@ -171,7 +171,7 @@ const getWordData = async (wordId) => {
       token: parseAuthCookie("auth_token"),
     },
   });
-  if(response.status === 403) return handle403Response()
+  if (response.status === 403) return handle403Response();
   return response;
 };
 
@@ -183,7 +183,7 @@ const getUserWords = async () => {
       token: parseAuthCookie("auth_token"),
     },
   });
-  if(response.status === 403) return handle403Response()
+  if (response.status === 403) return handle403Response();
   if (response.ok) {
     response = await response.json();
     return response.words;
@@ -206,13 +206,12 @@ const formatNotebooksArray = (userNotebooks) => {
 };
 
 const getExerciseQuestions = async (exerciseParameters) => {
-  
   const response = await fetch(
     baseUrl + "/exercise/begin",
-    getRequestBody("POST", {exerciseParameters: exerciseParameters})
+    getRequestBody("POST", { exerciseParameters: exerciseParameters })
   );
 
-  if(response.status === 403) return handle403Response()
+  if (response.status === 403) return handle403Response();
 
   const exerciseQuestions = await response.json();
   return exerciseQuestions;
@@ -223,7 +222,7 @@ const completeExercise = async (params) => {
     baseUrl + "/exercise/complete",
     getRequestBody("POST", params)
   );
-  if(response.status === 403) return handle403Response()
+  if (response.status === 403) return handle403Response();
 
   const exerciseResults = await response.json();
   return exerciseResults;
